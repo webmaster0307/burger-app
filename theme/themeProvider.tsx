@@ -5,9 +5,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles";
 import NextAppDirEmotionCacheProvider from "./EmotionCacheProvider";
 import { getPalette } from "./palette";
+import {typography} from "./typography";
 import { Roboto } from "next/font/google";
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -34,10 +35,7 @@ export default function ThemeProvider({
   const theme = React.useMemo(
     () =>
       createTheme({
-        typography: {
-          fontSize: 12,
-          fontFamily: roboto.style.fontFamily,
-        },
+        typography,
         palette: getPalette(mode),
       }),
     [mode],
