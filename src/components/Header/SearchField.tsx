@@ -1,10 +1,12 @@
 'use client';
 
-import * as React from 'react';
+import React, {use, useEffect, useState} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';
+import { useSearch } from '@/providers/SearchProvider';
+import { useDebounce } from '@/hooks/useDebounce';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -49,6 +51,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchField: React.FC = () => {
+  const [value, setValue] = useState('');
+  const debouncedSearchValue = useDebounce(value, 500);
+  const {onChange, value: searchParam} = useSearch();
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  }
+
+  useEffect(() => {
+    if(value !== searchParam) {
+      onChange(debouncedSearchValue);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchValue])
+
+  useEffect(() => {
+    setValue(searchParam);
+  }, [searchParam])
+
   return (
     <Button color="inherit">
       <Search>
@@ -58,6 +79,8 @@ const SearchField: React.FC = () => {
         <StyledInputBase
           placeholder="Type to search"
           inputProps={{ 'aria-label': 'search' }}
+          onChange={handleChange}
+          value={value}
         />
       </Search>
     </Button>

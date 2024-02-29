@@ -1,24 +1,52 @@
 'use client';
 
 import { useDebounce } from '@/hooks/useDebounce';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
-const SearchContext = createContext<string | null>(null);
+interface ISearchContext {
+  value: string;
+  onChange: (value: string) => void;
+}
 
-export const useSearch = (): string | null => useContext(SearchContext);
+export const SearchContext = createContext<ISearchContext>({
+  value: '',
+  onChange: () => {},
+});
+
+export const useSearch = (): ISearchContext => useContext(SearchContext);
 
 const SearchProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const [searchValue, setSearchValue] = useState<string | null>(null);
-  const debouncedSearchValue = useDebounce(searchValue, 500);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const searchParams = useSearchParams();
+  const router = useRouter()
+  const searchParam = searchParams.get('q') || '';
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      if(value) {
+        params.set(name, value)
+      } else {
+        params.delete(name)
+      }
+ 
+      return params.toString()
+    },
+    [searchParams]
+  )
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchParam = urlParams.get('search');
     setSearchValue(searchParam);
-  }, []);
+  }, [searchParam]);
+
+  const onChange = (value: string) => {
+    router.push('/' + '?' + createQueryString('q', value))
+  }
 
   return (
-    <SearchContext.Provider value={debouncedSearchValue}>
+    <SearchContext.Provider value={{value: searchValue, onChange}}>
       {children}
     </SearchContext.Provider>
   );
