@@ -1,7 +1,6 @@
 'use client';
 
-import { useDebounce } from '@/hooks/useDebounce';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
@@ -21,7 +20,7 @@ const SearchProvider: React.FC<{children: React.ReactNode}> = ({ children }) => 
   const [searchValue, setSearchValue] = useState<string>('');
   const searchParams = useSearchParams();
   const router = useRouter()
-  const searchParam = searchParams.get('q') || '';
+  const searchParam = searchParams.get('search') || '';
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -42,7 +41,7 @@ const SearchProvider: React.FC<{children: React.ReactNode}> = ({ children }) => 
   }, [searchParam]);
 
   const onChange = (value: string) => {
-    router.push('/' + '?' + createQueryString('q', value))
+    router.push('/' + '?' + createQueryString('search', value))
   }
 
   return (

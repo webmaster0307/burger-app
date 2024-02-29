@@ -6,6 +6,7 @@ import Header from "@/components/Header/Header";
 import Box from "@mui/material/Box";
 import { CartProvider } from "@/providers/CartProvider";
 import SearchProvider from "@/providers/SearchProvider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,18 +23,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider>
-          <CartProvider>
-            <SearchProvider>
-              <Box sx={{bgcolor: 'background.default'}}>
-                <Header />
-                <Box pt={8} minHeight="calc(100vh - 64px)">
-                  {children}
+        <Suspense>
+          <ThemeProvider>
+            <CartProvider>
+              <SearchProvider>
+                <Box sx={{bgcolor: 'background.default'}}>
+                  <Header />
+                  <Box pt={8} minHeight="calc(100vh - 64px)">
+                    {children}
+                  </Box>
                 </Box>
-              </Box>
-            </SearchProvider>
-          </CartProvider>
-        </ThemeProvider>
+              </SearchProvider>
+            </CartProvider>
+          </ThemeProvider>
+        </Suspense>
       </body>
     </html>
   );
