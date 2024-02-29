@@ -16,9 +16,14 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Burger Test Project.
+<img width="1765" alt="Screenshot 2024-02-29 at 10 02 43 AM" src="https://github.com/webmaster0307/burger-app/assets/50177554/87787d15-1faf-4587-a5fe-510b0eba3e41">
+<img width="1757" alt="Screenshot 2024-02-29 at 10 02 59 AM" src="https://github.com/webmaster0307/burger-app/assets/50177554/a599af70-027a-4b0a-a4a9-f78d5415a6fa">
+<img width="1759" alt="Screenshot 2024-02-29 at 10 03 33 AM" src="https://github.com/webmaster0307/burger-app/assets/50177554/ed1093b3-49f8-4af5-b16f-7a6b881d898e">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Tech Stacks:
+Next.js app router, Material UI
+
 
 ## Learn More
 
