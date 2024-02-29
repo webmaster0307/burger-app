@@ -6,49 +6,34 @@ import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/st
 import NextAppDirEmotionCacheProvider from "./EmotionCacheProvider";
 import { getPalette } from "./palette";
 import {typography} from "./typography";
-import { Roboto } from "next/font/google";
+import { PaletteMode } from "@mui/material";
 
-export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-});
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {}, mode: 'dark' });
 
 export default function ThemeProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [mode, setMode] = React.useState<PaletteMode>('dark');
 
-  const [mode, setMode] = React.useState<'light' | 'dark'>('dark');
-  const colorMode = React.useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      },
-    }),
-    [],
-  );
+  const toggleColorMode = () => {
+    setMode((prevMode) => prevMode === 'light' ? 'dark' : 'light');
+  };
 
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        typography,
-        palette: getPalette(mode),
-      }),
-    [mode],
-  );
+  const theme = createTheme({
+    typography,
+    palette: getPalette(mode),
+  });
 
   return (
     <NextAppDirEmotionCacheProvider options={{ key: "mui" }}>
-      <ColorModeContext.Provider value={colorMode}>
-        <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
+        <ColorModeContext.Provider value={{toggleColorMode, mode}}>
           <CssBaseline />
           {children}
-        </MuiThemeProvider>
-      </ColorModeContext.Provider>
+        </ColorModeContext.Provider>
+      </MuiThemeProvider>
     </NextAppDirEmotionCacheProvider>
   );
 }

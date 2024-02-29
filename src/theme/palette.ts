@@ -8,12 +8,13 @@ export const getPalette = (mode: PaletteMode): PaletteOptions => ({
     paper: mode === 'dark' ? grey[900] : '#fff'
   },
   primary: {
-    main: "#d5fb84",
+    main: mode === 'dark' ? "#d5fb84" : '#17d96d',
   },
   secondary: {
-    main: mode === 'dark' ? grey[700] : grey[900]
+    main: mode === 'dark' ? grey[700] : grey[800]
   },
   text: {
     primary: mode === 'dark' ? "#fff" : '#000',
   },
-})
+  mode
+});

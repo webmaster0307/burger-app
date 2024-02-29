@@ -36,11 +36,11 @@ const BurgerCard: React.FC<IBurgerCardProps> = ({burger}) => {
           <Typography 
             variant='body2'
             sx={{
-              "display": "-webkit-box",
-              "-webkit-line-clamp": "3",
-              "-webkit-box-orient": "vertical",
-              "overflow": "hidden",
-              "min-height": "50px",
+              display: "-webkit-box",
+              WebkitLineClamp: "3",
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              minHeight: "50px",
             }}
           >{burger.description}</Typography>
         </CardContent>

@@ -25,9 +25,11 @@ export default function RootLayout({
         <ThemeProvider>
           <CartProvider>
             <SearchProvider>
-              <Header />
-              <Box pt={8}>
-                {children}
+              <Box sx={{bgcolor: 'background.default'}}>
+                <Header />
+                <Box pt={8} minHeight="calc(100vh - 64px)">
+                  {children}
+                </Box>
               </Box>
             </SearchProvider>
           </CartProvider>

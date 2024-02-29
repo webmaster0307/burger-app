@@ -24,12 +24,16 @@ export default function Cart() {
           <Box textAlign="center" pt={2} px={20} mb={12}>
             <Typography variant="h4" mt={2}>Shopping Cart</Typography>
           </Box>
-          {cart.map((cartItem) => (
-            <CartItem 
-              key={cartItem.item.id}
-              cartItem={cartItem}
-            />
-          ))}
+          {cart.length === 0 ? (
+            <Typography variant="body1" textAlign="center">No items in your shopping cart.</Typography>
+          ) : (
+            cart.map((cartItem) => (
+              <CartItem 
+                key={cartItem.item.id}
+                cartItem={cartItem}
+              />
+            ))
+          )}
         </CardContent>
       </Card>
     </Container>

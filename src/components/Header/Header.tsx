@@ -18,20 +18,20 @@ import Link from 'next/link';
 import { CartContext } from '../../providers/CartProvider';
 
 const Header = () => {
-  const colorMode = useContext(ColorModeContext);
+  const {toggleColorMode, mode} = useContext(ColorModeContext);
   const {cart} = useContext(CartContext); 
   const theme = useTheme();
   const totalCartItems = cart.reduce((acc, item) => acc + item.count, 0);
 
   return (
-    <Box sx={{ flexGrow: 1 }} px={10}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{bgcolor: 'background.default'}}>
         <Toolbar sx={{bgcolor: 'background.default'}}>
           <Box component={Link} href="/" flexGrow={1} display="flex" alignItems="center" sx={{cursor: 'pointer'}}>
             <Typography variant="h5" component="div" mr={2} color="primary.main" fontWeight="bold">
               BURGER
             </Typography>
-            <HomeIcon sx={{color: 'white'}} />
+            <HomeIcon sx={{color: 'text.primary'}} />
           </Box>
           <Box display="flex" alignItems="center">
             <SearchField />
@@ -42,7 +42,7 @@ const Header = () => {
                 </Badge>
               </Link>
             </Box>
-            <IconButton sx={{ ml: 1, color: 'text.primary' }} onClick={colorMode.toggleColorMode}>
+            <IconButton sx={{ ml: 1, color: 'text.primary' }} onClick={() => toggleColorMode()}>
               {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
           </Box>

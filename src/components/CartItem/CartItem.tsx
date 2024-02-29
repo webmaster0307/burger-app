@@ -2,8 +2,8 @@ import { ICartItem } from '@/providers/CartProvider';
 import React from 'react'
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
-import { IconButton, Typography } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Typography } from '@mui/material';
+import RemoveFromCart from '../RemoveFromCart/RemoveFromCart';
 
 interface ICartItemProps {
   cartItem: ICartItem;
@@ -24,9 +24,7 @@ const CartItem: React.FC<ICartItemProps> = ({ cartItem }) => {
       </Grid>
       <Grid item md={3} display="flex" alignItems="center">
         <Typography variant="body1">${cartItem.item.price}</Typography>
-        <IconButton sx={{color: 'text.primary', ml: 2}}>
-          <DeleteIcon />
-        </IconButton>
+        <RemoveFromCart burger={cartItem.item} />
       </Grid>
     </Grid>
   )
