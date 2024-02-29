@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Button, Typography } from "@mui/material"
 
 export default function Error({
@@ -7,7 +9,6 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
- 
   return (
     <Box>
       <Typography variant="h2">Something went wrong!</Typography>

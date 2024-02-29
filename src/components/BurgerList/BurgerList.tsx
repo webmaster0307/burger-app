@@ -10,15 +10,13 @@ interface IBurgerListProps {
 
 const BurgerList: React.FC<IBurgerListProps> = ({burgers}) => {
   return (
-    <Box pt={3}>
-      <Grid container spacing={4}>
-        {burgers.map((burger) => (
-          <Grid item md={3} key={burger.id}>
-            <BurgerCard burger={burger} />
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+    <Grid container spacing={4}>
+      {burgers.map((burger) => (
+        <Grid item md={3} key={burger.id}>
+          <BurgerCard burger={burger} />
+        </Grid>
+      ))}
+    </Grid>
   )
 }
 
