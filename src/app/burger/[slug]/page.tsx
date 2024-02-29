@@ -7,9 +7,10 @@ import { Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import Box from "@mui/material/Box";  
-import Button from '@mui/material/Button';
+import AddToCart from "@/components/AddToCart/AddToCart";
 
 export default async function Page({params}: {params: { slug: string}}) {
+
   const burgers = await getBurgers();
   const burger = burgers.products.find((burger) => burger.slug === params.slug);
 
@@ -45,7 +46,8 @@ export default async function Page({params}: {params: { slug: string}}) {
               width={500}
               height={300}
               style={{
-                borderRadius: '10px'
+                borderRadius: '10px',
+                objectFit: 'cover'
               }}
             />
             <Typography variant="h4" mt={2}>{burger.name}</Typography>
@@ -54,7 +56,7 @@ export default async function Page({params}: {params: { slug: string}}) {
               <Typography variant="body2" mt={4}>{burger.description}</Typography>
               <Typography variant="body2" mt={2}>Nutrition: {`${burger.calorie} calories`}</Typography>
             </Box>
-            <Button variant="contained" sx={{mt: 10, textTransform: 'none', px: 8, borderRadius: '50px'}} color="secondary">Add to Cart</Button>
+            <AddToCart burger={burger} />
           </Box>
         </CardContent>
       </Card>

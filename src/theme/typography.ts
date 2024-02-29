@@ -15,14 +15,14 @@ export const typography = {
     lineHeight: 1.3,
   },
   h5: {
-    fontSize: '16px',
+    fontSize: '18px',
     fontWeight: 700,
   },
   h6: {
-    fontSize: '16px'
+    fontSize: '20px'
   },
   body1: {
-    fontSize: '12px'
+    fontSize: '14px'
   },
   body2: {
     fontSize: '12px'
