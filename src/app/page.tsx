@@ -1,11 +1,14 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
+import Header from "@/components/Header/Header";
+import BurgerList from "@/components/BurgerList/BurgerList";
 
 export default function Home() {
   return (
     <Box>
-      Burger Page!!!
+      <Header />
+      <Container maxWidth="sm">
+        <BurgerList />
+      </Container>
     </Box>
   );
 }
