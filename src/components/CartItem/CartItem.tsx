@@ -2,6 +2,7 @@ import { ICartItem } from '@/providers/CartProvider';
 import React from 'react'
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material"
 import { Typography } from '@mui/material';
 import RemoveFromCart from '../RemoveFromCart/RemoveFromCart';
 
@@ -11,22 +12,26 @@ interface ICartItemProps {
 
 const CartItem: React.FC<ICartItemProps> = ({ cartItem }) => {
   return (
-    <Grid container my={4}>
-      <Grid item md={9} display="flex" alignItems="center">
-        <Image 
-          width={80}
-          height={80}
-          src={cartItem.item.image}
-          alt={cartItem.item.name}
-          style={{borderRadius: '50%'}}
-        />
-        <Typography variant="body1" ml={4}>{cartItem.item.name} ({cartItem.count})</Typography>
-      </Grid>
-      <Grid item md={3} display="flex" alignItems="center">
-        <Typography variant="body1">${cartItem.item.price}</Typography>
-        <RemoveFromCart burger={cartItem.item} />
-      </Grid>
-    </Grid>
+    <>
+      <TableRow
+        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+      >
+        <TableCell component="th" scope="row">
+          <Image 
+            width={80}
+            height={80}
+            src={cartItem.item.image}
+            alt={cartItem.item.name}
+            style={{borderRadius: '50%'}}
+          />
+        </TableCell>
+        <TableCell align="right">{cartItem.item.name}</TableCell>
+        <TableCell align="right">${cartItem.item.price / 100}</TableCell>
+        <TableCell align="right">{cartItem.count}</TableCell>
+        <TableCell align="right">${cartItem.item.price / 100 * cartItem.count}</TableCell>
+        <TableCell align="right"><RemoveFromCart burger={cartItem.item} /></TableCell>
+      </TableRow>
+    </>
   )
 }
 

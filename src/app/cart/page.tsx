@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import { useContext } from "react";
 import { CartContext } from "@/providers/CartProvider";
 import CartItem from "@/components/CartItem/CartItem";
+import CartTable from "@/components/CartTable/CartTable";
 
 export default function Cart() {
   const {cart} = useContext(CartContext);
@@ -27,12 +28,7 @@ export default function Cart() {
           {cart.length === 0 ? (
             <Typography variant="body1" textAlign="center">No items in your shopping cart.</Typography>
           ) : (
-            cart.map((cartItem) => (
-              <CartItem 
-                key={cartItem.item.id}
-                cartItem={cartItem}
-              />
-            ))
+            <CartTable cart={cart} />
           )}
         </CardContent>
       </Card>
