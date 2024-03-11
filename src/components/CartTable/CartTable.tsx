@@ -11,7 +11,6 @@ interface ICartTable {
 const CartTable: React.FC<ICartTable> = ({cart, tax = 0.05}) => {
   const total = cart.reduce((acc, cartItem) => (acc + (cartItem.item.price / 100) * cartItem.count ), 0)
   return (
-    <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
         <TableRow>
@@ -58,7 +57,6 @@ const CartTable: React.FC<ICartTable> = ({cart, tax = 0.05}) => {
         </TableRow>
       </TableBody>
     </Table>
-  </TableContainer>
   )
 }
 
