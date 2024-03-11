@@ -42,15 +42,7 @@ export const CartProvider: React.FC<{children: React.ReactNode}> = ({ children }
     setCart((prevCart) => {
       const cartItem = prevCart.find((cartItem) => cartItem.item.id === item.id);
       if (cartItem) {
-        if (cartItem.count === 1) {
-          return prevCart.filter((cartItem) => cartItem.item.id !== item.id);
-        }
-        return prevCart.map((cartItem) => {
-          if (cartItem.item.id === item.id) {
-            return { ...cartItem, count: cartItem.count - 1 };
-          }
-          return cartItem;
-        });
+        return prevCart.filter((cartItem) => cartItem.item.id !== item.id);
       }
       return prevCart;
     });
